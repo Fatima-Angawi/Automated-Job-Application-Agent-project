@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.env
+.vscode/
+.venv/
+.DS_Store
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+
+# Logs
+*.log
+
+# Coverage
+htmlcov/
+.coverage
+
+# Editor directories and files
+.idea/
