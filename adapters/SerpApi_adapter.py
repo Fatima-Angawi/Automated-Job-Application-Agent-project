@@ -1,3 +1,7 @@
+from serpapi import GoogleSearch
+from core.adapters.base_adapter import JobSearchAdapter
+from core.models import NormalizedJob
+
 class SerpApiGoogleJobsAdapter(JobSearchAdapter):
     source_name = "serpapi_google_jobs"
   
@@ -15,19 +19,30 @@ class SerpApiGoogleJobsAdapter(JobSearchAdapter):
         jobs_results = results.get("jobs_results", [])
         # TODO: حوّلي JobSearchQuery إلى API params
         # TODO: اعملي client.search
+    
 
         normalized_jobs = []
 
         for job in jobs_results:
-            # مؤقتًا: رجّعي الداتا كما هي
-            # لاحقًا: تحولينها لـ NormalizedJob
-            normalized_jobs.append(job)
+            normalized_jobs.append(
+                NormalizedJob(
+                    title=job.get("title"),
+                    company_name=job.get("company_name"),
+                    location=job.get("location"),
+                    description=job.get("description"),
+                    url=job.get("job_id"),
+                    source=self.source_name
+                )
+            )
 
         return normalized_jobs
-    
-
         # TODO: استخرجي jobs_results
         # TODO: حوّلي كل job إلى NormalizedJob
 
      def capabilities(self):
-        # TODO: رجعي dictionary تحدد الخصائص المدعومة
+        # TODO: رجعي dictionary 
+          return {
+            "keywords": True,
+            "location": True,
+            "remote": False
+          }
