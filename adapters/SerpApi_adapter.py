@@ -15,6 +15,15 @@ class SerpApiGoogleJobsAdapter(JobSearchAdapter):
         jobs_results = results.get("jobs_results", [])
         # TODO: حوّلي JobSearchQuery إلى API params
         # TODO: اعملي client.search
+
+        normalized_jobs = []
+
+        for job in jobs_results:
+            # مؤقتًا: رجّعي الداتا كما هي
+            # لاحقًا: تحولينها لـ NormalizedJob
+            normalized_jobs.append(job)
+
+        return normalized_jobs
     
 
         # TODO: استخرجي jobs_results
